@@ -4,220 +4,223 @@
              xmlns:local="clr-namespace:CyberSecurityAwarenessChatbot"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <!-- Define common colors -->
-        <SolidColorBrush x:Key="BackgroundColor" Color="#20232A"/>
-        <SolidColorBrush x:Key="ChatbotColor" Color="#4CAF50"/>
-        <!-- Green for Chatbot -->
-        <SolidColorBrush x:Key="UserColor" Color="#00BCD4"/>
-        <!-- Cyan for User -->
-        <SolidColorBrush x:Key="TextColor" Color="#E0E0E0"/>
-        <!-- Light Gray for general text -->
-        <SolidColorBrush x:Key="ButtonColor" Color="#673AB7"/>
-        <!-- Deep Purple for buttons -->
-        <SolidColorBrush x:Key="AccentColor" Color="#FFC107"/>
-        <!-- Amber for accents -->
-        <SolidColorBrush x:Key="BorderColor" Color="#424242"/>
-        <!-- Darker Gray for borders -->
+        
+            <!-- Define common colors -->
+            <SolidColorBrush x:Key="BackgroundColor" Color="#20232A"/>
+            <SolidColorBrush x:Key="ChatbotColor" Color="#4CAF50"/>
+            <!-- Green for Chatbot -->
+            <SolidColorBrush x:Key="UserColor" Color="#00BCD4"/>
+            <!-- Cyan for User -->
+            <SolidColorBrush x:Key="TextColor" Color="#E0E0E0"/>
+            <!-- Light Gray for general text -->
+            <SolidColorBrush x:Key="ButtonColor" Color="#673AB7"/>
+            <!-- Deep Purple for buttons -->
+            <SolidColorBrush x:Key="AccentColor" Color="#FFC107"/>
+            <!-- Amber for accents -->
+            <SolidColorBrush x:Key="BorderColor" Color="#424242"/>
+            <!-- Darker Gray for borders -->
 
-        <!-- Base Style for Buttons -->
-        <Style TargetType="Button">
-            <Setter Property="Background" Value="{StaticResource ButtonColor}"/>
-            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="10,5"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
+            <!-- Base Style for Buttons -->
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="{StaticResource ButtonColor}"/>
+                <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Padding" Value="10,5"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{StaticResource AccentColor}"/>
-                    <Setter Property="Foreground" Value="#333333"/>
-                </Trigger>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="#FF9800"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{StaticResource AccentColor}"/>
+                        <Setter Property="Foreground" Value="#333333"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="#FF9800"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
 
-        <!-- Style for TextBoxes -->
-        <Style TargetType="TextBox">
-            <Setter Property="Background" Value="#32363E"/>
-            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="5"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="CornerRadius" Value="5"/>
-            <Setter Property="KeyboardNavigation.TabNavigation" Value="Local" />
-            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border Background="{TemplateBinding Background}"
+            <!-- Style for TextBoxes -->
+            <Style TargetType="TextBox">
+                <Setter Property="Background" Value="#32363E"/>
+                <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <!-- Explicitly set CornerRadius in the style -->
+                <Setter Property="KeyboardNavigation.TabNavigation" Value="Local" />
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TextBox">
+                            <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{TemplateBinding CornerRadius}">
-                            <ScrollViewer x:Name="PART_ContentHost" />
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                                <ScrollViewer x:Name="PART_ContentHost" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
-        <!-- Style for ListBoxes -->
-        <Style TargetType="ListBox">
-            <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
-            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Padding" Value="5"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-        </Style>
+            <!-- Style for ListBoxes -->
+            <Style TargetType="ListBox">
+                <Setter Property="Background" Value="{StaticResource BackgroundColor}"/>
+                <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            </Style>
 
-        <!-- Style for TextBlocks -->
-        <Style TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-        </Style>
+            <!-- Style for TextBlocks -->
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="TextWrapping" Value="Wrap"/>
+            </Style>
 
-        <!-- Style for RichTextBox (for chat history) -->
-        <Style TargetType="RichTextBox">
-            <Setter Property="Background" Value="#282C34"/>
-            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="IsReadOnly" Value="True"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-        </Style>
+            <!-- Style for RichTextBox (for chat history) -->
+            <Style TargetType="RichTextBox">
+                <Setter Property="Background" Value="#282C34"/>
+                <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="IsReadOnly" Value="True"/>
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            </Style>
 
-        <!-- Style for RadioButtons in Quiz -->
-        <Style TargetType="RadioButton">
-            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Margin" Value="0,5"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="{StaticResource AccentColor}"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+            <!-- Style for RadioButtons in Quiz -->
+            <Style TargetType="RadioButton">
+                <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Margin" Value="0,5"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="{StaticResource AccentColor}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
 
-        <!-- Style for ComboBox for Reminder timeframe -->
-        <Style TargetType="ComboBox">
-            <Setter Property="Background" Value="#32363E"/>
-            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="5"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="CornerRadius" Value="5"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ComboBox">
-                        <Grid>
-                            <ToggleButton x:Name="toggleButton"
+            <!-- Style for ComboBox for Reminder timeframe -->
+            <Style TargetType="ComboBox">
+                <Setter Property="Background" Value="#32363E"/>
+                <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <!-- Explicitly set CornerRadius in the style -->
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ComboBox">
+                            <Grid>
+                                <ToggleButton x:Name="toggleButton"
                                           Background="{TemplateBinding Background}"
                                           BorderBrush="{TemplateBinding BorderBrush}"
                                           BorderThickness="{TemplateBinding BorderThickness}"
                                           CornerRadius="{TemplateBinding CornerRadius}"
                                           IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                           ClickMode="Press">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <ContentPresenter Grid.Column="0"
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ContentPresenter Grid.Column="0"
                                                       ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                                                       Content="{TemplateBinding SelectionBoxItem}"
                                                       ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
                                                       ContentSource="SelectionBoxItem"
                                                       VerticalAlignment="Center"
                                                       Margin="{TemplateBinding Padding}"/>
-                                    <Path x:Name="arrow" Grid.Column="1"
+                                        <Path x:Name="arrow" Grid.Column="1"
                                           Fill="{StaticResource TextColor}"
                                           Data="M0,0 L4,4 L8,0 Z"
                                           HorizontalAlignment="Center"
                                           VerticalAlignment="Center"
                                           Margin="0,0,8,0"/>
-                                </Grid>
-                            </ToggleButton>
-                            <Popup x:Name="PART_Popup"
+                                    </Grid>
+                                </ToggleButton>
+                                <Popup x:Name="PART_Popup"
                                    AllowsTransparency="True"
                                    IsOpen="{TemplateBinding IsDropDownOpen}"
                                    Placement="Bottom"
                                    PopupAnimation="{TemplateBinding PopupAnimation}"
                                    SnapsToDevicePixels="True">
-                                <Border x:Name="dropDownBorder"
+                                    <Border x:Name="dropDownBorder"
                                         Background="{StaticResource BackgroundColor}"
                                         BorderBrush="{StaticResource BorderColor}"
                                         BorderThickness="{TemplateBinding BorderThickness}"
                                         CornerRadius="5">
-                                    <ScrollViewer x:Name="ScrollViewer" Style="{DynamicResource {x:Static ToolBar.ScrollViewerStyleKey}}">
-                                        <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained"/>
-                                    </ScrollViewer>
-                                </Border>
-                            </Popup>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                                        <ScrollViewer x:Name="ScrollViewer" Style="{DynamicResource {x:Static ToolBar.ScrollViewerStyleKey}}">
+                                            <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                        </ScrollViewer>
+                                    </Border>
+                                </Popup>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
-        <!-- Style for ComboBoxItem -->
-        <Style TargetType="ComboBoxItem">
-            <Setter Property="Background" Value="#32363E"/>
-            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
-            <Setter Property="Padding" Value="5"/>
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Style.Triggers>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="{StaticResource ButtonColor}"/>
-                    <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#424242"/>
-                    <Setter Property="Foreground" Value="{StaticResource AccentColor}"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+            <!-- Style for ComboBoxItem -->
+            <Style TargetType="ComboBoxItem">
+                <Setter Property="Background" Value="#32363E"/>
+                <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="{StaticResource ButtonColor}"/>
+                        <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#424242"/>
+                        <Setter Property="Foreground" Value="{StaticResource AccentColor}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
 
-        <!-- DataTemplate for Chat Messages -->
-        <DataTemplate x:Key="ChatMessageTemplate">
-            <TextBlock TextWrapping="Wrap" Margin="5">
+            <!-- DataTemplate for Chat Messages -->
+            <DataTemplate x:Key="ChatMessageTemplate">
+                <TextBlock TextWrapping="Wrap" Margin="5">
                 <Run Text="{Binding Sender, Mode=OneWay}"
                      Foreground="{Binding SenderColor, Mode=OneWay}"/>
                 <Run Text=": " Foreground="{StaticResource TextColor}"/>
                 <Run Text="{Binding Message, Mode=OneWay}"
                      Foreground="{StaticResource TextColor}"/>
-            </TextBlock>
-        </DataTemplate>
+                </TextBlock>
+            </DataTemplate>
 
-    </Application.Resources>
+        </Application.Resources>
 </Application>
