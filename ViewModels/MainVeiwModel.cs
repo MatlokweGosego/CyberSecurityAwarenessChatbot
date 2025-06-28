@@ -8,6 +8,7 @@ using System.Media;
 using System.Windows.Media;
 using System.Text.RegularExpressions; // For more advanced NLP simulation
 using System.Text; // For StringBuilder
+using System.Windows.Threading; // For DispatcherTimer if needed later
 
 namespace CyberSecurityAwarenessChatbot.ViewModels // Corrected namespace
 {

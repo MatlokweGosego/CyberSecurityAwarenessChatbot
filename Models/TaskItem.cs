@@ -4,42 +4,73 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
-using CyberSecurityAwarenessChatbot.ViewModels;
+using CyberSecurityAwarenessChatbot.Utility;
 using System.Runtime.CompilerServices;
 
-namespace CyberSecurityAwarenessChatbot.Utility
+namespace CyberSecurityAwarenessChatbot.Models
 {
- 
-    // Base class for ViewModels to implement INotifyPropertyChanged.
-    // This allows the UI to automatically update when bound properties change.
-    public class ObservableObject : INotifyPropertyChanged
-    {
-        // Event that consumers (like WPF UI) can subscribe to for property change notifications.
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        // Helper method to raise the PropertyChanged event.
-        // [CallerMemberName] attribute automatically injects the name of the calling property.
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    public class TaskItem : ObservableObject
+    {
+        private string _title;
+        public string Title
         {
-            // Safely invoke the event handlers if any are subscribed.
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get => _title;
+            set => SetProperty(ref _title, value);
         }
 
-        // Helper method to set a property's value and automatically raise PropertyChanged
-        // if the new value is different from the old value.
-        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        private string _description;
+        public string Description
         {
-            // Check if the new value is equal to the existing value to prevent unnecessary updates.
-            if (Equals(storage, value))
-            {
-                return false; // Value has not changed, no need to update or notify.
-            }
+            get => _description;
+            set => SetProperty(ref _description, value);
+        }
 
-            // Update the backing field with the new value.
-            storage = value;
-            // Notify subscribers that the property has changed.
-            OnPropertyChanged(propertyName);
-            return true; // Value has changed and notification has been sent.
+        private DateTime? _reminderDate;
+        public DateTime? ReminderDate
+        {
+            get => _reminderDate;
+            set
+            {
+                SetProperty(ref _reminderDate, value);
+                OnPropertyChanged(nameof(HasReminder));
+                OnPropertyChanged(nameof(ReminderInfo));
+            }
+        }
+
+        private bool _isCompleted;
+        public bool IsCompleted
+        {
+            get => _isCompleted;
+            set => SetProperty(ref _isCompleted, value);
+        }
+
+        // Helper property to check if a reminder is set
+        public bool HasReminder => ReminderDate.HasValue;
+
+        // Formatted string for displaying reminder information
+        public string ReminderInfo
+        {
+            get
+            {
+                if (HasReminder)
+                {
+                    return $"Reminder set for: {ReminderDate.Value:yyyy-MM-dd HH:mm}";
+                }
+                return string.Empty;
+            }
+        }
+
+        // Default constructor for serialization (if needed)
+        public TaskItem() { }
+
+        // Constructor for creating new tasks
+        public TaskItem(string title, string description = "", DateTime? reminderDate = null)
+        {
+            Title = title;
+            Description = description;
+            ReminderDate = reminderDate;
+            IsCompleted = false;
         }
     }
 }

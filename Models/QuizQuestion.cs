@@ -7,7 +7,7 @@ using CyberSecurityAwarenessChatbot.Utility;
 
 namespace CyberSecurityAwarenessChatbot.Models
 {
-    // QuizQuestion represents a single question in the cybersecurity quiz.
+    // QuizQuestion represents a single question in the cybersecurity quiz.  
     public class QuizQuestion : ObservableObject
     {
         public string QuestionText { get; set; }
