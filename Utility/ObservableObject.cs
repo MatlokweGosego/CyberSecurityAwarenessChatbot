@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CyberSecurityAwarenessChatbot.Utility 
 {
-    
+
     // Base class for ViewModels to implement INotifyPropertyChanged.
     // This allows the UI to automatically update when bound properties change.
     public class ObservableObject : INotifyPropertyChanged

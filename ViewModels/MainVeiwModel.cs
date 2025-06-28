@@ -167,6 +167,7 @@ namespace CyberSecurityAwarenessChatbot.ViewModels // Corrected namespace
         public RelayCommand DeleteTaskCommand { get; private set; }
         public RelayCommand StartQuizCommand { get; private set; }
         public RelayCommand SubmitAnswerCommand { get; private set; }
+        public RelayCommand SelectQuizOptionCommand { get; private set; } // New command for RadioButton selection
         public RelayCommand ClearActivityLogCommand { get; private set; }
 
         // Chatbot's knowledge base
@@ -204,6 +205,7 @@ namespace CyberSecurityAwarenessChatbot.ViewModels // Corrected namespace
             DeleteTaskCommand = new RelayCommand(ExecuteDeleteTaskCommand, CanExecuteDeleteTaskCommand);
             StartQuizCommand = new RelayCommand(ExecuteStartQuizCommand, CanExecuteStartQuizCommand);
             SubmitAnswerCommand = new RelayCommand(ExecuteSubmitAnswerCommand, CanExecuteSubmitAnswerCommand);
+            SelectQuizOptionCommand = new RelayCommand(ExecuteSelectQuizOptionCommand); // Initialize new command
             ClearActivityLogCommand = new RelayCommand(ExecuteClearActivityLogCommand);
         }
 
@@ -926,6 +928,16 @@ namespace CyberSecurityAwarenessChatbot.ViewModels // Corrected namespace
             LogActivity("Quiz started.");
         }
 
+        private void ExecuteSelectQuizOptionCommand(object parameter)
+        {
+            // When a RadioButton is clicked, its Content (the option string) is passed as parameter.
+            // We set this directly to CurrentQuestion.SelectedOption.
+            if (CurrentQuestion != null && parameter is string selectedOption)
+            {
+                CurrentQuestion.SelectedOption = selectedOption;
+            }
+        }
+
         private void DisplayNextQuizQuestion()
         {
             if (_currentQuestionIndex < _allQuizQuestions.Count)
@@ -971,9 +983,9 @@ namespace CyberSecurityAwarenessChatbot.ViewModels // Corrected namespace
                 System.Windows.Application.Current.Dispatcher.Invoke(() =>
                 {
                     AppendChatbotMessage($"Next question...");
-                }, System.Windows.Threading.DispatcherPriority.Background);
+                }, DispatcherPriority.Background);
 
-                System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
+                DispatcherTimer timer = new DispatcherTimer();
                 timer.Interval = TimeSpan.FromSeconds(2); // 2 seconds delay
                 timer.Tick += (s, e) =>
                 {

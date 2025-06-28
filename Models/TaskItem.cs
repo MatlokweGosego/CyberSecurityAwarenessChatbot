@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace CyberSecurityAwarenessChatbot.Models
 {
-
+    // TaskItem represents a single cybersecurity-related task the user needs to manage.
     public class TaskItem : ObservableObject
     {
         private string _title;
@@ -74,3 +74,5 @@ namespace CyberSecurityAwarenessChatbot.Models
         }
     }
 }
+
+

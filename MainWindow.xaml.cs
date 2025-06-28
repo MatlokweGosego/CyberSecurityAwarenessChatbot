@@ -15,6 +15,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CyberSecurityAwarenessChatbot.ViewModels;
 using System.Globalization;
+using System.Windows.Threading;
+
 
 namespace CyberSecurityAwarenessChatbot
 {
@@ -61,14 +63,11 @@ namespace CyberSecurityAwarenessChatbot
                 // To access a resource, use the pack URI syntax.
                 // Assuming your .wav file is in a folder named 'Sounds' in your project,
                 // and its Build Action is set to 'Resource'.
-                // The 'component' part refers to the current assembly.
-                SoundPlayer player = new SoundPlayer(Application.GetResourceStream(new Uri("Sounds/welcome.wav", UriKind.Relative)).Stream);
+                SoundPlayer player = new SoundPlayer(Application.GetResourceStream(new Uri("Sounds/CyberSecurityAwarenessChatbotGreeting.wav", UriKind.Relative)).Stream);
                 player.Play();
             }
             catch (Exception ex)
             {
-                // In a real application, you might log this error or display a message box.
-                // For a POE, just catching it is fine.
                 MessageBox.Show($"Error playing sound: {ex.Message}", "Sound Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -131,6 +130,24 @@ namespace CyberSecurityAwarenessChatbot
         }
     }
 
+    // Converter to compare a string value with a parameter for RadioButton IsChecked binding
+    public class StringToBooleanConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            // 'value' is the CurrentQuestion.SelectedOption (e.g., "A) Option 1")
+            // 'parameter' is the content of the current RadioButton (e.g., "A) Option 1")
+            return value != null && value.Equals(parameter);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            // 'value' is true/false from RadioButton.IsChecked
+            // 'parameter' is the content of the current RadioButton (the string option)
+            return (bool)value ? parameter : Binding.DoNothing; // Set CurrentQuestion.SelectedOption if true
+        }
+    }
+
     // Attached property to set focus to a TextBox. Useful for automatically focusing input.
     public static class FocusExtension
     {
@@ -156,9 +173,8 @@ namespace CyberSecurityAwarenessChatbot
             {
                 uiElement.Dispatcher.BeginInvoke(
                     new Action(() => uiElement.Focus()),
-                    System.Windows.Threading.DispatcherPriority.Input);
+                    DispatcherPriority.Input);
             }
-
         }
     }
 }

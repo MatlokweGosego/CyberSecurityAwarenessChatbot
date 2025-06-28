@@ -4,7 +4,6 @@
              xmlns:local="clr-namespace:CyberSecurityAwarenessChatbot"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-
         <!-- Define common colors -->
         <SolidColorBrush x:Key="BackgroundColor" Color="#20232A"/>
         <SolidColorBrush x:Key="ChatbotColor" Color="#4CAF50"/>
@@ -63,7 +62,6 @@
             <Setter Property="Padding" Value="5"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="CornerRadius" Value="5"/>
             <Setter Property="KeyboardNavigation.TabNavigation" Value="Local" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Template">
@@ -72,7 +70,8 @@
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{TemplateBinding CornerRadius}">
+                                CornerRadius="5">
+                            <!-- Applied directly to Border within template -->
                             <ScrollViewer x:Name="PART_ContentHost" />
                         </Border>
                     </ControlTemplate>
@@ -136,7 +135,6 @@
             <Setter Property="Padding" Value="5"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="CornerRadius" Value="5"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBox">
@@ -144,10 +142,8 @@
                             <ToggleButton x:Name="toggleButton"
                                           Background="{TemplateBinding Background}"
                                           BorderBrush="{TemplateBinding BorderBrush}"
-                                          BorderThickness="{TemplateBinding BorderThickness}"
-                                          CornerRadius="{TemplateBinding CornerRadius}"
-                                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                          ClickMode="Press">
+                                          BorderThickness="{TemplateBinding BorderThickness}" >
+                                <!-- Applied directly to Border within template -->
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -172,14 +168,16 @@
                                    AllowsTransparency="True"
                                    IsOpen="{TemplateBinding IsDropDownOpen}"
                                    Placement="Bottom"
-                                   PopupAnimation="{TemplateBinding PopupAnimation}"
-                                   SnapsToDevicePixels="True">
+                                   PopupAnimation="Fade" >
+                                <!-- Fixed: Set a default animation directly on Popup -->
                                 <Border x:Name="dropDownBorder"
                                         Background="{StaticResource BackgroundColor}"
                                         BorderBrush="{StaticResource BorderColor}"
                                         BorderThickness="{TemplateBinding BorderThickness}"
                                         CornerRadius="5">
-                                    <ScrollViewer x:Name="ScrollViewer" Style="{DynamicResource {x:Static ToolBar.ScrollViewerStyleKey}}">
+                                    <!-- Applied directly to Border within template -->
+                                    <ScrollViewer x:Name="ScrollViewer">
+                                        <!-- Fixed: Removed ToolBar.ScrollViewerStyleKey -->
                                         <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained"/>
                                     </ScrollViewer>
                                 </Border>
